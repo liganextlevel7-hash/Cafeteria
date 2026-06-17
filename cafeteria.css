@@ -323,6 +323,7 @@ h1, h2, h3, h4, .eyebrow, .btn, .page-number {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-deep);
   background: var(--paper-soft);
+  overflow: hidden;
 }
 
 /* lomo del libro: sombra central fija, por encima de las páginas */
@@ -347,15 +348,48 @@ h1, h2, h3, h4, .eyebrow, .btn, .page-number {
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transform-style: preserve-3d;
-  transition: transform var(--speed) var(--ease), opacity calc(var(--speed) * .85) var(--ease);
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
 }
-.spread.active { opacity: 1; pointer-events: auto; transform: rotateY(0deg) translateX(0); }
+.spread.active { opacity: 1; pointer-events: auto; }
 
-.spread.enter-from-next { opacity: 0; transform: rotateY(22deg) translateX(2.5rem); }
-.spread.enter-from-prev { opacity: 0; transform: rotateY(-22deg) translateX(-2.5rem); }
-.spread.exit-next { opacity: 0; transform: rotateY(-22deg) translateX(-2.5rem); }
-.spread.exit-prev { opacity: 0; transform: rotateY(22deg) translateX(2.5rem); }
+/* la hoja que se va gira sobre el lomo como una tarjeta rígida;
+   backface-visibility la hace "desaparecer" pasado los 90°, dejando
+   ver la doble página siguiente, que ya está debajo, fija y completa */
+.spread.leaving-next {
+  opacity: 1;
+  pointer-events: none;
+  transform-origin: left center;
+  box-shadow: .6rem 0 2rem rgba(0, 0, 0, .35);
+  animation: turnNext var(--speed) var(--ease) forwards;
+}
+.spread.leaving-prev {
+  opacity: 1;
+  pointer-events: none;
+  transform-origin: right center;
+  box-shadow: -.6rem 0 2rem rgba(0, 0, 0, .35);
+  animation: turnPrev var(--speed) var(--ease) forwards;
+}
+
+/* sombra que recorre la hoja mientras gira, como si la luz la atravesara */
+.spread .page-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .4), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.spread.leaving-next .page-shade { animation: shadeSweep var(--speed) linear forwards; }
+.spread.leaving-prev .page-shade { animation: shadeSweep var(--speed) linear forwards; transform: scaleX(-1); }
+
+@keyframes turnNext { from { transform: rotateY(0deg); } to { transform: rotateY(-180deg); } }
+@keyframes turnPrev { from { transform: rotateY(0deg); } to { transform: rotateY(180deg); } }
+@keyframes shadeSweep { 0% { opacity: 0; } 48% { opacity: .65; } 58% { opacity: .65; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spread.leaving-next, .spread.leaving-prev { animation: none; opacity: 0; }
+}
 
 .page {
   position: relative;
@@ -520,6 +554,13 @@ h1, h2, h3, h4, .eyebrow, .btn, .page-number {
   .page-left { border-right: none; border-bottom: .0625rem solid rgba(28, 42, 53, .08); }
   .book-frame::after { display: none; }
 
-  .spread.enter-from-next, .spread.exit-next { transform: translateY(1.4rem); }
-  .spread.enter-from-prev, .spread.exit-prev { transform: translateY(-1.4rem); }
+  /* en pantallas chicas el giro 3D no se lee bien con páginas apiladas;
+     se reemplaza por un deslizamiento vertical simple */
+  .spread.leaving-next, .spread.leaving-prev {
+    animation: none;
+    transition: transform var(--speed) var(--ease);
+  }
+  .spread.leaving-next { transform: translateY(-100%); }
+  .spread.leaving-prev { transform: translateY(100%); }
+  .spread .page-shade { display: none; }
 }
