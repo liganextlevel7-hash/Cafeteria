@@ -1,26 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Portfolio Website HTML CSS and Javascript | Codehal</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- box icons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Rivera — Portafolio</title>
+  <meta name="description" content="Portafolio personal de Alex Rivera, Desarrollador Web Full Stack.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="cafeteria.css">
+  <!-- box icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-            <!-- profile page -->
-            <!-- page 1 & 2 -->
-                <!-- page 1 (work experience) -->
-                <!-- page 2 (education) -->
-            <!-- page 3 & 4 -->
-                <!-- page 3 (my services) -->
-                <!-- page 4 (my skills) -->
-            <!-- page 5 & 6 -->
-                <!-- page 5 (latest project or my portfolio) -->
-                <!-- page 6 (contact me) -->
-    <script src="script.js"></script>
+<div class="scene" id="scene">
+
+  <!-- ============================================= -->
+  <!-- PORTADA (cover) -->
+  <!-- ============================================= -->
+  <section class="cover" id="cover">
+    <div class="cover-glow" aria-hidden="true"></div>
+    <div class="cover-content">
+      <p class="eyebrow">Portafolio personal</p>
+      <!-- ✏️ EDITA: tu nombre -->
+      <h1 class="cover-name">Alex Rivera</h1>
+      <!-- ✏️ EDITA: tu profesión -->
+      <p class="cover-role">Desarrollador&nbsp;Web&nbsp;Full&nbsp;Stack</p>
+      <button class="btn btn-primary" id="btnOpen" type="button">
+        Abrir portafolio <i class='bx bx-right-arrow-alt'></i>
+      </button>
+    </div>
+    <p class="cover-hint">Haz clic para entrar</p>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- PÁGINA DE PERFIL (profile page) -->
+  <!-- ============================================= -->
+  <section class="profile-page" id="profilePage">
+    <button class="icon-btn corner-btn" id="btnToCover" type="button" aria-label="Volver a la portada">
+      <i class='bx bx-arrow-back'></i>
+    </button>
+
+    <div class="profile-layout">
+      <div class="profile-photo">
+        <div class="avatar-ring" aria-hidden="true"></div>
+        <!-- ✏️ EDITA: reemplaza este div por <img src="tu-foto.jpg" alt="Tu nombre" class="avatar-img"> -->
+        <div class="avatar-initials">AR</div>
+      </div>
+
+      <div class="profile-info">
+        <!-- ✏️ EDITA: tu saludo -->
+        <h2>Hola, soy Alex <span aria-hidden="true">👋</span></h2>
+        <!-- ✏️ EDITA: tu biografía corta -->
+        <p class="profile-bio">
+          Construyo interfaces web rápidas, accesibles y con atención al detalle.
+          Me especializo en convertir ideas en productos digitales que la gente
+          realmente disfruta usar.
+        </p>
+
+        <!-- ✏️ EDITA: tus redes sociales (cambia los href="#") -->
+        <div class="profile-socials">
+          <a href="mailto:tu@correo.com" class="social-btn" aria-label="Correo"><i class='bx bx-envelope'></i></a>
+          <a href="#" class="social-btn" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+          <a href="#" class="social-btn" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+        </div>
+
+        <div class="profile-actions">
+          <button class="btn btn-primary" id="btnExplore" type="button">Explorar mi trabajo</button>
+          <button class="btn btn-ghost" id="btnContactQuick" type="button">Contáctame</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- LIBRO: 6 páginas en 3 dobles páginas -->
+  <!-- página 1: experiencia | página 2: educación -->
+  <!-- página 3: servicios   | página 4: habilidades -->
+  <!-- página 5: portafolio  | página 6: contacto -->
+  <!-- ============================================= -->
+  <section class="book" id="book">
+    <button class="icon-btn corner-btn" id="btnToProfile" type="button" aria-label="Volver al perfil">
+      <i class='bx bx-arrow-back'></i>
+    </button>
+
+    <div class="book-frame">
+
+      <!-- Doble página 1: Experiencia + Educación -->
+      <article class="spread active" data-index="0">
+        <div class="page page-left">
+          <p class="page-number">01</p>
+          <h3 class="page-title">Experiencia laboral</h3>
+          <!-- ✏️ EDITA: tu experiencia laboral -->
+          <ul class="timeline">
+            <li>
+              <span class="timeline-date">2024 — Presente</span>
+              <h4>Desarrollador Frontend</h4>
+              <p class="timeline-place">Nimbus Studio</p>
+              <p class="timeline-desc">Construcción de interfaces con React y optimización de rendimiento.</p>
+            </li>
+            <li>
+              <span class="timeline-date">2022 — 2024</span>
+              <h4>Desarrollador Web Junior</h4>
+              <p class="timeline-place">Agencia Digital S.A.</p>
+              <p class="timeline-desc">Desarrollo de sitios institucionales y tiendas en línea.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="page page-right">
+          <p class="page-number">02</p>
+          <h3 class="page-title">Educación</h3>
+          <!-- ✏️ EDITA: tu educación -->
+          <ul class="timeline">
+            <li>
+              <span class="timeline-date">2019 — 2023</span>
+              <h4>Ingeniería en Sistemas</h4>
+              <p class="timeline-place">Universidad Tecnológica</p>
+            </li>
+            <li>
+              <span class="timeline-date">2023</span>
+              <h4>Certificación Full Stack</h4>
+              <p class="timeline-place">Plataforma de cursos en línea</p>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Doble página 2: Servicios + Habilidades -->
+      <article class="spread" data-index="1">
+        <div class="page page-left">
+          <p class="page-number">03</p>
+          <h3 class="page-title">Mis servicios</h3>
+          <!-- ✏️ EDITA: tus servicios -->
+          <div class="service-grid">
+            <div class="service-card">
+              <i class='bx bx-code-alt'></i>
+              <h4>Desarrollo web</h4>
+              <p>Sitios rápidos y responsivos hechos a medida.</p>
+            </div>
+            <div class="service-card">
+              <i class='bx bx-palette'></i>
+              <h4>Diseño UI/UX</h4>
+              <p>Interfaces claras centradas en el usuario.</p>
+            </div>
+            <div class="service-card">
+              <i class='bx bx-wrench'></i>
+              <h4>Mantenimiento</h4>
+              <p>Soporte y mejoras continuas para tu sitio.</p>
+            </div>
+          </div>
+        </div>
+        <div class="page page-right">
+          <p class="page-number">04</p>
+          <h3 class="page-title">Habilidades</h3>
+          <!-- ✏️ EDITA: tus habilidades y porcentajes -->
+          <div class="skills">
+            <div class="skill"><span>HTML / CSS</span><div class="skill-bar"><div style="width:95%"></div></div></div>
+            <div class="skill"><span>JavaScript</span><div class="skill-bar"><div style="width:85%"></div></div></div>
+            <div class="skill"><span>React</span><div class="skill-bar"><div style="width:75%"></div></div></div>
+            <div class="skill"><span>Node.js</span><div class="skill-bar"><div style="width:65%"></div></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Doble página 3: Portafolio + Contacto -->
+      <article class="spread" data-index="2">
+        <div class="page page-left">
+          <p class="page-number">05</p>
+          <h3 class="page-title">Mi portafolio</h3>
+          <!-- ✏️ EDITA: tus proyectos -->
+          <div class="project-list">
+            <a href="#" class="project-card">
+              <span class="project-tag">Web App</span>
+              <h4>Sistema de pedidos</h4>
+              <p>App para gestionar pedidos en tiempo real.</p>
+            </a>
+            <a href="#" class="project-card">
+              <span class="project-tag">E-commerce</span>
+              <h4>Tienda en línea</h4>
+              <p>Carrito de compras y pasarela de pago.</p>
+            </a>
+          </div>
+        </div>
+        <div class="page page-right">
+          <p class="page-number">06</p>
+          <h3 class="page-title">Contáctame</h3>
+          <form class="contact-form" id="contactForm" novalidate>
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="email" name="correo" placeholder="Tu correo" required>
+            <textarea name="mensaje" placeholder="Tu mensaje" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            <p class="form-feedback" id="formFeedback" role="status"></p>
+          </form>
+        </div>
+      </article>
+
+    </div>
+
+    <nav class="book-nav" aria-label="Navegación del portafolio">
+      <button class="nav-arrow" id="btnPrev" type="button" aria-label="Página anterior"><i class='bx bx-chevron-left'></i></button>
+      <div class="dots" id="dots">
+        <button class="dot active" data-index="0" type="button" aria-label="Ir a experiencia y educación"></button>
+        <button class="dot" data-index="1" type="button" aria-label="Ir a servicios y habilidades"></button>
+        <button class="dot" data-index="2" type="button" aria-label="Ir a portafolio y contacto"></button>
+      </div>
+      <button class="nav-arrow" id="btnNext" type="button" aria-label="Página siguiente"><i class='bx bx-chevron-right'></i></button>
+    </nav>
+  </section>
+
+</div>
+
+<script src="cafeteria.js"></script>
 </body>
 </html>
