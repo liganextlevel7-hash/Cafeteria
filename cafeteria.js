@@ -62,6 +62,8 @@ btnToProfile.addEventListener('click', () => {
 /* =====================================================
    Navegación entre las 3 dobles páginas (flip 3D)
 ===================================================== */
+const FLIP_MS = 700; // debe coincidir con --speed en cafeteria.css
+
 function goToSpread(index, direction) {
   if (index < 0 || index > LAST_SPREAD || index === currentSpread) return;
 
@@ -71,21 +73,20 @@ function goToSpread(index, direction) {
   const current = spreads[currentSpread];
   const next = spreads[index];
 
-  // coloca la página entrante en su posición inicial sin transición
-  next.classList.add('notransition');
-  next.classList.remove('active', 'exit-next', 'exit-prev');
-  next.classList.add(direction === 'next' ? 'enter-from-next' : 'enter-from-prev');
-  void next.offsetHeight; // fuerza el repintado antes de animar
-  next.classList.remove('notransition');
+  // la nueva doble página queda lista y visible de inmediato, debajo de la actual
+  next.style.zIndex = 1;
+  next.classList.add('active');
 
-  // anima salida de la actual y entrada de la siguiente
+  // la doble página actual queda encima y gira sobre el lomo, como una hoja real
   current.classList.remove('active');
-  current.classList.add(direction === 'next' ? 'exit-next' : 'exit-prev');
+  current.style.zIndex = 3;
+  current.classList.add(direction === 'next' ? 'leaving-next' : 'leaving-prev');
 
-  requestAnimationFrame(() => {
-    next.classList.remove('enter-from-next', 'enter-from-prev');
-    next.classList.add('active');
-  });
+  setTimeout(() => {
+    current.classList.remove('leaving-next', 'leaving-prev');
+    current.style.zIndex = '';
+    next.style.zIndex = '';
+  }, FLIP_MS);
 
   currentSpread = index;
   updateDots();
